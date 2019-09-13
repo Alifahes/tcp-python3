@@ -1,13 +1,10 @@
 import socket
-
-mysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-mysock.connect(('www.py4inf.com', 80))
-mysock.send(b'GET http://www.py4inf.com/code/romeo.txt HTTP/1.0\n\n')
-
-while True:
-    data = mysock.recv(512)
-    if ( len(data) < 1 ) :
-        break
-    print (data);
-
-mysock.close()
+target_host = "192.168.0.1"
+target_port = 80
+# create a socket object
+client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+# send some data
+client.sendto(b"AAABBBCCC",(target_host,target_port))
+# receive some data
+data, addr = client.recvfrom(4096)
+print (data)
